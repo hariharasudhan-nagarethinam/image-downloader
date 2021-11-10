@@ -24,10 +24,10 @@ func getImageURLs(imageRepositoryURL string) ([]ImageURL, error) {
 }
 
 func downloadImage(imageUrl string) {
-	if response, err := http.Get(imageUrl); err != nil {
+	if _, err := http.Get(imageUrl); err != nil {
 		return
 	} else {
-		fmt.Println(response)
+		fmt.Printf("%s downloaded \n", imageUrl)
 		return
 	}
 }
@@ -38,5 +38,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(urls)
+
+	for _, data := range urls {
+		downloadImage(data.DownloadURL)
+	}
 }
